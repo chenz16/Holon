@@ -8,8 +8,6 @@ Local human-AI teams that connect into a larger hybrid workforce network.
 
 Holon is a commercial application and framework for hybrid real and virtual workforces. Each local app is a lightweight team desk: a real person can create and manage a small team of local AI agents, proxy people, inbound missions, outbound assignments, and returned deliverables. Complexity grows through connected desks, not through deep local agent hierarchies.
 
-## 中文解释
-
 Holon 的核心不是做一个无限复杂的 AI 员工组织图，而是让每个人都拥有一个轻量的本地团队。这个本地团队可以独立工作，也可以连接到其他真人和他们的本地团队。
 
 这个名字来自 **holon** 的系统论概念：一个单元既是完整的整体，也是更大系统的一部分。用在 Holon 里就是：
