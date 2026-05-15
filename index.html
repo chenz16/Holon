@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Holon — Local teams. Connected workforce.</title>
+<meta name="description" content="Holon is a hybrid workforce platform where every person runs a lightweight local AI team, and those teams connect into a larger human–AI network." />
+<meta property="og:title" content="Holon — Local teams. Connected workforce." />
+<meta property="og:description" content="Hybrid workforce platform: local AI teams + proxy employees + cloud-managed handoffs." />
+<meta property="og:image" content="docs/assets/holon-logo.svg" />
+<link rel="icon" type="image/svg+xml" href="docs/assets/holon-logo.svg" />
+<link rel="preconnect" href="https://rsms.me/" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<style>
+  :root {
+    --bg: #F8F6EF;
+    --bg-alt: #EFEBDD;
+    --ink: #1A1A18;
+    --ink-soft: #4A4A45;
+    --ink-mute: #6E6A60;
+    --line: #E2DCC8;
+    --gold: #C69A35;
+    --green: #2E7D52;
+    --blue: #1F6F9E;
+    --purple: #7B4FAB;
+    --radius: 14px;
+    --max: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color .15s; }
+  a:hover { border-color: var(--ink); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+
+  /* Nav */
+  nav.top {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    position: sticky; top: 0; background: rgba(248,246,239,.92);
+    backdrop-filter: blur(8px); z-index: 50;
+  }
+  nav.top .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 10px; border: none; }
+  .brand-mark {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, #fff 0 25%, #111 26% 100%);
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px #111;
+  }
+  .brand-name { font-weight: 720; font-size: 18px; letter-spacing: -0.01em; }
+  nav.top ul { display: flex; gap: 24px; list-style: none; padding: 0; margin: 0; }
+  nav.top ul a { border: none; color: var(--ink-soft); font-size: 14px; }
+  nav.top ul a:hover { color: var(--ink); }
+
+  /* Hero */
+  header.hero { padding: 88px 0 64px; }
+  .eyebrow {
+    display: inline-block; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-mute); border: 1px solid var(--line); padding: 6px 10px; border-radius: 999px;
+    background: #fff;
+  }
+  h1 {
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 1.04; letter-spacing: -0.025em;
+    margin: 22px 0 18px; font-weight: 720;
+  }
+  h1 .accent { color: var(--green); }
+  .lede {
+    font-size: clamp(18px, 1.6vw, 22px); color: var(--ink-soft); max-width: 740px; margin: 0 0 32px;
+  }
+  .cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px;
+    border-radius: 10px; font-weight: 560; font-size: 15px; border: 1px solid var(--ink);
+  }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .btn.primary:hover { background: #000; }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--bg-alt); }
+
+  .hero-art {
+    margin-top: 56px;
+    border: 1px solid var(--line); border-radius: var(--radius);
+    background: #fff; padding: 24px; overflow: hidden;
+  }
+  .hero-art svg { width: 100%; height: auto; display: block; }
+
+  /* Section */
+  section { padding: 80px 0; border-top: 1px solid var(--line); }
+  section .label {
+    font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-mute); margin-bottom: 14px;
+  }
+  section h2 {
+    font-size: clamp(28px, 3.4vw, 44px); letter-spacing: -0.02em;
+    margin: 0 0 18px; font-weight: 700;
+  }
+  section .intro { font-size: 18px; color: var(--ink-soft); max-width: 780px; }
+
+  /* Holon principle */
+  .principle { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  @media (max-width: 860px) { .principle { grid-template-columns: 1fr; } }
+  .principle blockquote {
+    border-left: 3px solid var(--green);
+    margin: 28px 0 0; padding: 6px 0 6px 18px;
+    color: var(--ink-soft); font-size: 17px;
+  }
+  .principle .zh {
+    background: var(--bg-alt); border-radius: var(--radius); padding: 22px 24px;
+    font-size: 15.5px; color: var(--ink); border: 1px solid var(--line);
+  }
+  .principle .zh ul { margin: 12px 0 0; padding-left: 20px; }
+  .principle .zh li { margin-bottom: 6px; }
+
+  /* Diagram block */
+  pre.diagram {
+    background: #111; color: #F8F6EF; padding: 22px 24px; border-radius: var(--radius);
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 14px; line-height: 1.7; overflow-x: auto; margin: 28px 0 0;
+  }
+  pre.diagram .k { color: var(--gold); }
+  pre.diagram .a { color: #8DD2A6; }
+  pre.diagram .c { color: #9AAAB4; }
+
+  /* Concept cards */
+  .grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px;
+  }
+  @media (max-width: 980px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; position: relative; overflow: hidden;
+  }
+  .card .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 8px; vertical-align: middle; }
+  .card h3 { margin: 4px 0 8px; font-size: 18px; letter-spacing: -0.01em; }
+  .card p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+  .card .tag { font-size: 11.5px; color: var(--ink-mute); letter-spacing: .12em; text-transform: uppercase; }
+
+  .c-gold   .dot { background: var(--gold); }
+  .c-green  .dot { background: var(--green); }
+  .c-blue   .dot { background: var(--blue); }
+  .c-purple .dot { background: var(--purple); }
+  .c-ink    .dot { background: var(--ink); }
+  .c-bone   .dot { background: var(--bg-alt); border: 1px solid var(--ink-mute); }
+
+  /* Two-column compare */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 40px; }
+  @media (max-width: 800px) { .compare { grid-template-columns: 1fr; } }
+  .compare .col {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px;
+  }
+  .compare .col.bad { background: #FBF5EE; }
+  .compare h4 { margin: 0 0 12px; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; color: var(--ink-mute); }
+  .compare ul { margin: 0; padding-left: 18px; color: var(--ink-soft); }
+  .compare li { margin-bottom: 8px; }
+
+  /* Lifecycle */
+  .lifecycle { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+  .lifecycle .step {
+    background: #fff; border: 1px solid var(--line); border-radius: 999px;
+    padding: 8px 16px; font-size: 13.5px; color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .lifecycle .step .num {
+    width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: #fff;
+    font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 600;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--line); padding: 44px 0 60px; color: var(--ink-mute); font-size: 14px;
+  }
+  footer .row { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  footer a { color: var(--ink-soft); border-bottom: none; }
+  footer a:hover { color: var(--ink); text-decoration: underline; }
+
+  .pill {
+    display: inline-block; padding: 3px 9px; border-radius: 999px; background: var(--bg-alt);
+    color: var(--ink-soft); font-size: 12px; margin-left: 6px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <span class="brand-mark"></span>
+      <span class="brand-name">Holon</span>
+    </a>
+    <ul>
+      <li><a href="#idea">Idea</a></li>
+      <li><a href="#model">Model</a></li>
+      <li><a href="#concepts">Concepts</a></li>
+      <li><a href="#protocol">Protocol</a></li>
+      <li><a href="#docs">Docs</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Design preview · v0 · 2026‑05</span>
+    <h1>Local teams.<br/><span class="accent">Connected workforce.</span></h1>
+    <p class="lede">
+      Holon is a hybrid workforce platform where every person runs a lightweight local AI team,
+      and those teams connect through cloud‑managed proxy employees into a larger human–AI network.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="docs/product/holon-product-definition.md">Read the product definition →</a>
+      <a class="btn ghost" href="https://github.com/chenz16/Holon" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+
+    <div class="hero-art">
+      <img src="docs/assets/holon-logo.svg" alt="Holon fractal team logo" style="width:100%;max-width:760px;display:block;margin:0 auto;" />
+    </div>
+  </div>
+</header>
+
+<section id="idea">
+  <div class="wrap">
+    <div class="label">The Holon Principle</div>
+    <h2>Each unit is a whole — and a part.</h2>
+    <div class="principle">
+      <div>
+        <p class="intro">
+          A <em>holon</em> is something that is both a complete whole and a node inside a larger whole.
+          Holon applies that idea to work: every local app is a complete team desk, and at the same time
+          a node in a larger network of human and AI teams.
+        </p>
+        <blockquote>
+          Complexity grows through connections between teams — not by piling more agents inside one app.
+        </blockquote>
+      </div>
+      <div class="zh">
+        <strong>中文说明</strong>
+        <ul>
+          <li>每个 local app 都是一个完整的小团队</li>
+          <li>每个小团队又是更大职场网络里的一个节点</li>
+          <li>虚拟员工可以连接真人，真人也可以把任务交给自己的虚拟团队</li>
+          <li>复杂度通过团队之间的连接和级联产生，而不是单个 app 内无限加深 agent 层级</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="model">
+  <div class="wrap">
+    <div class="label">Hybrid Workforce Model</div>
+    <h2>Not chatbots. Not autonomous swarms.</h2>
+    <p class="intro">
+      The durable workplace is a hybrid: real people, local AI teams, proxy employees, cloud
+      coordination, and auditable handoffs. Holon makes that hybrid first‑class instead of bolting
+      it onto a single agent UI.
+    </p>
+
+<pre class="diagram"><span class="c"># A node = one person's local Holon desk</span>
+<span class="k">Owner</span>
+  └─ <span class="a">local AI staff</span>          <span class="c">execute bounded assignments</span>
+  └─ <span class="a">proxy staff</span>             <span class="c">stand in for a remote person / node</span>
+  └─ <span class="a">inbound missions</span>        <span class="c">work other nodes sent to you</span>
+  └─ <span class="a">outbound assignments</span>    <span class="c">work you sent to others</span>
+  └─ <span class="a">deliverables</span>            <span class="c">durable returned artifacts</span>
+</pre>
+  </div>
+</section>
+
+<section id="concepts">
+  <div class="wrap">
+    <div class="label">Core Concepts</div>
+    <h2>Six pieces — nothing more.</h2>
+    <p class="intro">The vocabulary is intentionally small. The owner manages outcomes, not agent graphs.</p>
+
+    <div class="grid">
+      <div class="card c-ink">
+        <div class="tag"><span class="dot"></span>Node</div>
+        <h3>The local desk</h3>
+        <p>One real person's app: roster, inbox, outbound work, deliverables, policies, connections. Run local or hosted.</p>
+      </div>
+      <div class="card c-gold">
+        <div class="tag"><span class="dot"></span>Local AI Staff</div>
+        <h3>Bounded executors</h3>
+        <p>Agents that run through a runtime adapter (Hermes, OpenAI Agents SDK, browser workers, …) and return events or files.</p>
+      </div>
+      <div class="card c-blue">
+        <div class="tag"><span class="dot"></span>Proxy Staff</div>
+        <h3>People as first‑class staff</h3>
+        <p>A local identity that represents a remote person or remote Holon node. Assign work the same way you assign to AI.</p>
+      </div>
+      <div class="card c-green">
+        <div class="tag"><span class="dot"></span>Mission</div>
+        <h3>Inbound work</h3>
+        <p>What another node sent you. Accept, reject, ask, delegate, or submit a deliverable — with a clear owner and state.</p>
+      </div>
+      <div class="card c-purple">
+        <div class="tag"><span class="dot"></span>Assignment</div>
+        <h3>Outbound work you own</h3>
+        <p>Routed to local AI, proxy staff, or yourself — with routing metadata so you can always see where the work lives.</p>
+      </div>
+      <div class="card c-bone">
+        <div class="tag"><span class="dot"></span>Deliverable</div>
+        <h3>The durable artifact</h3>
+        <p>Not just a chat message. A titled, attributed result attached back to the assignment that produced it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="protocol">
+  <div class="wrap">
+    <div class="label">Core Protocol</div>
+    <h2>Dispatch → Accept → Execute → Return.</h2>
+    <p class="intro">
+      The minimum protocol is a mission going out to another node and a deliverable coming back —
+      with handoffs that never fail silently.
+    </p>
+
+    <div class="lifecycle">
+      <span class="step"><span class="num">1</span>Owner assigns to proxy staff</span>
+      <span class="step"><span class="num">2</span>Mission sent to remote node</span>
+      <span class="step"><span class="num">3</span>Remote inbox: accept · reject · forward</span>
+      <span class="step"><span class="num">4</span>Execute locally or delegate</span>
+      <span class="step"><span class="num">5</span>Submit deliverable</span>
+      <span class="step"><span class="num">6</span>Attach back to original assignment</span>
+    </div>
+
+    <div class="compare">
+      <div class="col">
+        <h4>Holon does</h4>
+        <ul>
+          <li>Connect human‑owned local teams</li>
+          <li>Make proxy staff visibly tied to real people</li>
+          <li>Give every handoff a state and a returned artifact</li>
+          <li>Treat the cloud as a connector + reliability layer</li>
+          <li>Keep accountability human</li>
+        </ul>
+      </div>
+      <div class="col bad">
+        <h4>Holon avoids</h4>
+        <ul>
+          <li>Deep agent hierarchies inside one workspace</li>
+          <li>Generic workflow / drag‑drop builders</li>
+          <li>Black‑box swarms that own all work</li>
+          <li>Silent failure on remote handoffs</li>
+          <li>Agent graph editors as the main UX</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="docs">
+  <div class="wrap">
+    <div class="label">Design Docs</div>
+    <h2>Currently in design phase. <span class="pill">no code yet</span></h2>
+    <p class="intro">
+      Holon is a clean commercial restart of the earlier Mibusy V3 prototype. The initial design
+      lives entirely in the repo — start with the product definition, then the MVP scope, then the
+      architecture sketches.
+    </p>
+
+    <div class="grid" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="card">
+        <div class="tag">Product</div>
+        <h3><a href="docs/product/holon-product-definition.md">Holon Product Definition →</a></h3>
+        <p>The one‑line, the thesis, the core model, screens, positioning, differentiation, non‑goals.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Product</div>
+        <h3><a href="docs/product/mvp-scope.md">MVP Scope →</a></h3>
+        <p>The smallest commercial‑grade build that proves <em>local team → proxy → remote → deliverable</em>.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Architecture</div>
+        <h3><a href="docs/architecture/functional-architecture.md">Functional Architecture →</a></h3>
+        <p>Functional decomposition of node, cloud relay, runtime adapters, and protocol surfaces.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Architecture</div>
+        <h3><a href="docs/architecture/implementation-architecture.md">Implementation Architecture →</a></h3>
+        <p>How the functional pieces map to actual services, processes, and storage.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Architecture</div>
+        <h3><a href="docs/architecture/ui-architecture.md">UI Architecture →</a></h3>
+        <p>The Today / Inbound / Staff / Connections / Deliverables surface and its required states.</p>
+      </div>
+      <div class="card">
+        <div class="tag">Architecture</div>
+        <h3><a href="docs/architecture/diagrams.html">Diagrams →</a></h3>
+        <p>Rendered diagrams for the architecture docs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div>
+      <strong style="color: var(--ink);">Holon</strong> — Local teams. Connected workforce.<br/>
+      Design preview · 2026
+    </div>
+    <div>
+      <a href="https://github.com/chenz16/Holon">github.com/chenz16/Holon</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
