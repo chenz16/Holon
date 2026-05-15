@@ -18,6 +18,145 @@ Local role: team management, local execution, local context, mission inbox
 
 Hermes should power local AI execution. Holon should own product state, permissions, missions, assignments, connections, and deliverables.
 
+## MVP Boundary And Cases To Consider
+
+Holon needs to support multiple future surfaces, but the MVP should stay under Holon's control.
+
+### Case 1: Phone
+
+Phone is an important control surface:
+
+- review inbound missions
+- accept/reject work
+- check waiting proxy assignments
+- submit short deliverables
+- receive notifications
+- monitor connection health
+
+MVP position:
+
+- build mobile-responsive web first
+- do not build native iOS/Android runtime in MVP
+- do not run local AI workers on phone in MVP
+- later native shell can wrap the web app and notification layer
+
+### Case 2: Desktop Local App
+
+Desktop is the primary MVP execution surface.
+
+MVP position:
+
+- run a local web app or desktop-packaged web app
+- run local Hermes-based agents through Holon's runtime adapter
+- store local state in a Holon-controlled database
+- expose the same product API used by hosted nodes
+
+This is where local team creation and local agent execution should start.
+
+### Case 3: Desktop CLI Window Takeover
+
+Future users may want each opened CLI window to become a human-operated or agent-operated work session. Examples:
+
+- a user opens a terminal and lets Holon assign work into it
+- a real person uses the CLI as their work surface
+- Holon tracks terminal output as handoff progress
+- Holon collects final output as a deliverable
+
+MVP position:
+
+- do not take over arbitrary terminal windows
+- do not orchestrate provider CLIs such as Codex CLI, Claude Code CLI, or similar tools
+- do not depend on terminal state as product truth
+
+Reason:
+
+- CLI takeover is hard to secure and normalize
+- provider CLI behavior is not controlled by Holon
+- MVP should use Holon's own assignment API and Hermes runtime path
+
+### Case 4: Cowork-Like External Agent Results
+
+Cowork-like systems can produce useful results, but they are external agent products.
+
+MVP position:
+
+- do not run external agent products in parallel as first-class workers
+- do not model their internal lifecycle in Holon
+- do not make MVP depend on their session state or result format
+
+Future position:
+
+- external results can be imported as deliverables
+- external tools can become runtime adapters if they expose a stable API
+- external work can appear as a manual handoff, not as native Holon staff until the integration is reliable
+
+### MVP Execution Rule
+
+MVP local agents must be controlled by Holon:
+
+```text
+Holon assignment
+  -> Holon router
+  -> Holon runtime adapter
+  -> Hermes local agent
+  -> normalized events
+  -> Holon deliverable
+```
+
+No MVP path should require:
+
+- a third-party agent CLI
+- a manually watched terminal
+- an external agent product's session semantics
+- a mobile-native worker runtime
+
+## Languages And Frameworks
+
+Recommended MVP stack:
+
+```text
+TypeScript
+  app UI, API routes, protocol package, core domain services
+
+React + Next.js
+  web app, local node UI, hosted node UI, API endpoints
+
+Python
+  Hermes runtime adapter if Hermes integration is Python-first
+
+Postgres
+  local/dev and hosted database for MVP
+
+Drizzle or Prisma
+  TypeScript database access layer
+
+Zod
+  protocol and API payload validation
+
+pnpm workspace
+  monorepo package management
+```
+
+Runtime recommendation:
+
+```text
+MVP: Hermes adapter as the only local AI runtime
+Later: additional adapters behind the same runtime interface
+```
+
+Desktop packaging options:
+
+- start with local web app in browser
+- later package with Tauri or Electron
+- prefer Tauri if the app needs a lightweight desktop shell
+- keep runtime processes separate from UI shell
+
+Mobile options:
+
+- MVP: responsive web and PWA
+- later: Capacitor wrapper for notifications and app install feel
+- later still: native app only if phone-specific workflows justify it
+
 ## High-Level Stack
 
 Suggested MVP stack:
@@ -389,4 +528,3 @@ Holon decides what work exists, who owns it, who can receive it, and when it is 
 Hermes executes bounded local AI work.
 The protocol moves missions and deliverables between nodes.
 ```
-

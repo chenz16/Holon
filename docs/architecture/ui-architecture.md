@@ -52,6 +52,56 @@ Audit
 
 MVP should focus on the primary five.
 
+## Device Surfaces
+
+### Phone
+
+Phone is primarily a control and approval surface in MVP.
+
+Phone should support:
+
+- view Today
+- review inbound missions
+- accept/reject missions
+- check waiting remote work
+- submit short text deliverables
+- receive connection/failure notifications later
+
+Phone should not run local AI agents in MVP. It should control work running on a desktop, server, or hosted node.
+
+### Desktop Web / Local App
+
+Desktop is the primary team-building and execution surface.
+
+Desktop should support:
+
+- create and configure local AI staff
+- create and configure proxy staff
+- manage connections
+- run local Hermes-based assignments
+- review event timelines
+- inspect deliverables
+- manage context and settings
+
+### CLI Work Surface
+
+CLI takeover should be a future surface, not MVP.
+
+Possible future design:
+
+- each CLI session can be registered as a work surface
+- a real person can claim a mission from terminal
+- terminal output can be collected into a deliverable
+- the session appears as manual/human execution in Holon
+
+MVP should not depend on this. It should not attach to arbitrary terminal windows or giant-provider agent CLIs.
+
+### External Agent Product Surface
+
+Cowork-like or third-party agent products may be useful later as imported deliverables or runtime adapters.
+
+MVP should not show them as native Holon staff unless Holon controls their lifecycle through a stable API.
+
 ## Screen Responsibilities
 
 ### Today
@@ -412,4 +462,3 @@ Required:
 4. Connection health is visible before and after dispatch.
 5. The UI shows a local team, not a deep agent hierarchy.
 6. Every important workflow has an owner action and a system state.
-

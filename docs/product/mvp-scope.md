@@ -13,6 +13,28 @@ local team -> proxy staff -> remote human/team -> returned deliverable
 
 The MVP should not reproduce the full Mibusy prototype. It should extract the essential human-agent interconnect workflow into a clean app and framework.
 
+## MVP Boundary
+
+MVP should only include agent execution that Holon can fully control.
+
+Included:
+
+- local app owned by the user
+- local AI staff executed through Holon's runtime adapter
+- Hermes-based agent execution for local staff
+- Holon API-managed assignments, missions, handoffs, and deliverables
+- direct peer/cloud dispatch between Holon nodes
+
+Not included in MVP:
+
+- taking over external agent CLI windows such as Codex CLI, Claude Code CLI, or other giant-provider agent terminals
+- parallel integration with Cowork-like external agent products
+- treating third-party agent results as first-class remote workers
+- native mobile app runtime
+- desktop terminal takeover as a human control surface
+
+These cases should be considered in architecture, but not implemented in the first MVP. MVP should prove the core loop with agents Holon owns and controls.
+
 ## MVP User Story
 
 As a team owner, I can:
@@ -99,6 +121,10 @@ As a team owner, I can:
 ## Defer
 
 - native mobile shell
+- phone-native local runtime
+- desktop CLI takeover for real-person work sessions
+- external giant-provider agent CLI orchestration
+- Cowork-like external agent result ingestion as first-class workers
 - marketplace
 - public discovery
 - workspace billing
@@ -180,4 +206,3 @@ The MVP is acceptable when:
 5. node A receives the deliverable under the original assignment
 6. offline or failed peer dispatch is visible
 7. the demo can be replayed from a clean checkout
-
