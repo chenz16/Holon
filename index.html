@@ -40,6 +40,25 @@
   a { color: var(--ink); text-decoration: none; }
   ::selection { background: var(--green); color: #fff; }
 
+  /* Accessibility focus states */
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+
+  /* Scroll Reveal Animation Classes */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Staggered delays for grids */
+  .reveal.delay-1 { transition-delay: 0.1s; }
+  .reveal.delay-2 { transition-delay: 0.2s; }
+  .reveal.delay-3 { transition-delay: 0.3s; }
+  .reveal.delay-4 { transition-delay: 0.4s; }
+
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
 
   /* Nav */
@@ -87,14 +106,28 @@
     background: #fff;
   }
   .eyebrow .led { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(46,125,82,.18); }
+  
+  /* Text-wrap properties */
+  h1, h2 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
   h1.headline {
     font-size: clamp(44px, 7vw, 92px);
     line-height: 1.02; letter-spacing: -0.03em;
     margin: 24px 0 22px; font-weight: 720; max-width: 14ch;
   }
+  
+  @keyframes gradientShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
   h1 .pop {
-    background: linear-gradient(120deg, var(--green) 0%, var(--blue) 100%);
+    background: linear-gradient(120deg, var(--green) 0%, var(--blue) 50%, var(--green) 100%);
+    background-size: 200% auto;
     -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: gradientShimmer 6s ease infinite;
   }
   .lede {
     font-size: clamp(19px, 1.7vw, 23px); color: var(--ink-soft); max-width: 660px; margin: 0 0 36px;
@@ -126,7 +159,8 @@
 
   /* The shift — dark band */
   .shift { background: var(--bg-dark); color: var(--bg); }
-  .shift .label { color: #8B8B83; }
+  .shift .wrap { display: block; }
+  .shift .label { color: #A3A39A; } /* Brightened contrast */
   .shift h2 { color: #fff; }
   .shift .sub { color: #C9C5B8; }
   .shift .quote {
@@ -141,6 +175,194 @@
   .shift .panel { border: 1px solid #2A2A26; border-radius: var(--radius); padding: 26px; }
   .shift .panel h4 { margin: 0 0 8px; font-size: 14px; color: #C69A35; letter-spacing: .12em; text-transform: uppercase; }
   .shift .panel p { margin: 0; color: #C9C5B8; font-size: 15px; }
+  .nature-fractal {
+    margin: 46px 0 54px;
+    position: relative;
+    min-height: clamp(440px, 52vw, 680px);
+    border: 1px solid #2A2A26;
+    border-radius: 28px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(46,125,82,.32), transparent 34%),
+      radial-gradient(circle at 78% 28%, rgba(31,111,158,.28), transparent 36%),
+      radial-gradient(circle at 60% 78%, rgba(198,154,53,.22), transparent 34%),
+      #0A0B09;
+    box-shadow: 0 36px 110px rgba(0,0,0,.42);
+  }
+  .nature-fractal svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  .nature-fractal > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+  .nature-fractal::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(10,11,9,.82) 0%, rgba(10,11,9,.38) 38%, rgba(10,11,9,.08) 68%, rgba(10,11,9,.34) 100%),
+      linear-gradient(180deg, rgba(10,11,9,.18), rgba(10,11,9,.58));
+    pointer-events: none;
+  }
+  .fractal-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    padding: clamp(32px, 6vw, 78px);
+  }
+  .fractal-copy .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 18px;
+    color: #9ABEA5;
+    font-size: 12px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .fractal-copy .kicker::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #8DD2A6;
+    box-shadow: 0 0 22px rgba(141,210,166,.8);
+  }
+  .fractal-copy h3 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(44px, 7.4vw, 104px);
+    line-height: .98;
+    letter-spacing: -0.045em;
+    max-width: 11ch;
+  }
+  .fractal-copy h3 em {
+    font-family: 'Charter', 'Iowan Old Style', 'Source Serif Pro', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #8DD2A6;
+  }
+  .fractal-copy p {
+    margin: 22px 0 0;
+    max-width: 520px;
+    color: #DAD6CA;
+    font-size: clamp(16px, 1.45vw, 19px);
+    line-height: 1.62;
+  }
+  .fractal-badges {
+    position: absolute;
+    z-index: 2;
+    right: clamp(18px, 4vw, 54px);
+    bottom: clamp(18px, 4vw, 42px);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 410px;
+  }
+  .fractal-badges span {
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,.08);
+    color: #F8F6EF;
+    font-size: 12px;
+    backdrop-filter: blur(8px);
+  }
+  @media (max-width: 780px) {
+    .nature-fractal { min-height: 620px; margin: 34px 0 44px; }
+    .fractal-badges { left: 28px; right: 28px; justify-content: flex-start; }
+  }
+
+  /* Fractal / Inspired by nature */
+  .fractal {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+    padding: 140px 0;
+  }
+  .fractal .label { color: var(--green); }
+  .fractal-headline {
+    font-size: clamp(40px, 6.4vw, 84px);
+    line-height: 1.02; letter-spacing: -0.03em;
+    margin: 0 0 36px; max-width: 18ch; font-weight: 720;
+  }
+  .fractal-headline em {
+    font-family: 'Charter', 'Iowan Old Style', 'Source Serif Pro', Georgia, serif;
+    font-style: italic; font-weight: 400;
+    background: linear-gradient(120deg, var(--green) 0%, var(--blue) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    padding-right: .04em;
+  }
+  .fractal-lede {
+    font-size: clamp(18px, 1.55vw, 22px); color: var(--ink-soft);
+    max-width: 720px; margin: 0; line-height: 1.6;
+  }
+  .fractal-lede em {
+    color: var(--ink); font-style: normal; font-weight: 600;
+  }
+  .fractal-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 88px;
+  }
+  @media (max-width: 900px) { .fractal-grid { grid-template-columns: 1fr; } }
+  .fractal-card {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 32px 30px;
+  }
+  .fractal-card .ftag {
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--green); font-weight: 700; margin-bottom: 18px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .fractal-card .ftag::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  }
+  .fractal-card h3 {
+    margin: 0 0 12px; font-size: 19px; letter-spacing: -0.01em; line-height: 1.3;
+  }
+  .fractal-card p { margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+
+  .fractal-bridge {
+    margin-top: 96px; padding-top: 56px; border-top: 1px solid var(--line);
+    max-width: 760px;
+  }
+  .fractal-bridge .punchline {
+    font-size: clamp(22px, 2.2vw, 30px); line-height: 1.3; letter-spacing: -0.02em;
+    color: var(--ink); font-weight: 600; margin: 0 0 24px;
+  }
+  .fractal-bridge .punchline span { color: var(--green); }
+  .fractal-bridge .credit {
+    font-size: 16px; color: var(--ink-soft); margin: 0 0 32px;
+  }
+  .etymology {
+    background: #fff; border-left: 3px solid var(--gold); border-radius: 0 12px 12px 0;
+    padding: 20px 24px; margin: 0 0 32px;
+    font-family: 'Charter', 'Iowan Old Style', 'Source Serif Pro', Georgia, serif;
+    color: var(--ink-soft); font-size: 16px; line-height: 1.6;
+  }
+  .etymology strong {
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-style: normal; color: var(--ink); font-weight: 700;
+    letter-spacing: -0.005em; margin-right: 6px;
+  }
+  .etymology em { color: var(--ink); }
+  .fractal-bridge .closer-line {
+    font-size: clamp(17px, 1.45vw, 20px); color: var(--ink); line-height: 1.55; margin: 0;
+  }
+  .fractal-bridge .closer-line .muted {
+    display: block; margin-top: 14px; color: var(--ink-mute);
+    font-style: italic; font-size: 15px;
+    font-family: 'Charter', 'Iowan Old Style', Georgia, serif;
+  }
 
   /* Promise grid */
   .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 56px; }
@@ -164,16 +386,37 @@
   .promise p { margin: 0; color: var(--ink-soft); font-size: 15.5px; }
 
   /* How it feels — flow */
-  .flow { margin-top: 56px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; counter-reset: step; }
-  @media (max-width: 1000px) { .flow { grid-template-columns: repeat(2, 1fr); } }
+  .flow-container { position: relative; margin-top: 56px; }
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; counter-reset: step; position: relative; z-index: 2; }
+  
+  /* Connecting line for flow steps */
+  .flow::after {
+    content: '';
+    position: absolute;
+    top: 36px; /* Align with numbers */
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: var(--line);
+    z-index: -1;
+  }
+
+  @media (max-width: 1000px) { 
+    .flow { grid-template-columns: repeat(2, 1fr); } 
+    .flow::after { display: none; } /* Hide line on wrapped layouts for simplicity */
+  }
   @media (max-width: 560px)  { .flow { grid-template-columns: 1fr; } }
   .step {
     background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
     padding: 22px; display: flex; flex-direction: column; gap: 10px; position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02); /* Slight lift */
   }
   .step::before {
     counter-increment: step; content: counter(step, decimal-leading-zero);
-    font-size: 12px; color: var(--ink-mute); font-weight: 600; letter-spacing: .1em;
+    width: 28px; height: 28px; background: var(--bg); border: 1px solid var(--line); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--ink-mute); font-weight: 600; letter-spacing: .05em;
+    margin-bottom: 8px; /* Give space between badge and title */
   }
   .step h4 { margin: 0; font-size: 16px; letter-spacing: -0.01em; }
   .step p { margin: 0; color: var(--ink-soft); font-size: 14px; }
@@ -201,7 +444,11 @@
   .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 48px; }
   @media (max-width: 800px) { .compare { grid-template-columns: 1fr; } }
   .compare .col { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
-  .compare h4 { margin: 0 0 14px; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; }
+  
+  .compare h4 { 
+    margin: 0 0 14px; font-size: 13px; text-transform: uppercase; letter-spacing: .14em; 
+    display: flex; align-items: center; gap: 8px;
+  }
   .compare .col.bad h4 { color: #B65A3E; }
   .compare .col.good h4 { color: var(--green); }
   .compare ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 15px; }
@@ -216,10 +463,11 @@
   @media (max-width: 800px) { .builder { grid-template-columns: 1fr; } }
   .builder h3 { margin: 0 0 10px; font-size: 24px; letter-spacing: -0.015em; }
   .builder p { margin: 0; color: var(--ink-soft); font-size: 15.5px; }
-  .adapter-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .adapter-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .adapter {
-    background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px;
-    font-size: 13.5px; color: var(--ink); display: flex; align-items: center; gap: 8px;
+    background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 10px 16px; /* Pill shape */
+    font-size: 13px; font-weight: 500; color: var(--ink); display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
   }
   .adapter::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
 
@@ -244,8 +492,9 @@
   .docs-strip a {
     background: #fff; border: 1px solid var(--line); border-radius: 999px;
     padding: 9px 16px; font-size: 14px; color: var(--ink-soft);
+    transition: all 0.15s ease;
   }
-  .docs-strip a:hover { color: var(--ink); border-color: var(--ink); }
+  .docs-strip a:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-1px); }
 
   /* Footer */
   footer { border-top: 1px solid var(--line); padding: 36px 0 56px; color: var(--ink-mute); font-size: 14px; }
@@ -272,10 +521,10 @@
   </div>
 </nav>
 
-<header class="hero" id="top">
+<header class="hero reveal" id="top">
   <div class="wrap">
     <span class="eyebrow"><span class="led"></span>Design preview · launching 2026</span>
-    <h1 class="headline">Your AI team.<br/><span class="pop">Connected to everyone else's.</span></h1>
+    <h1 class="headline">Your AI team. <span class="pop">Connected to everyone else's.</span></h1>
     <p class="lede">
       Holon gives you a small, private team of AI workers — and lets them work with the
       AI teams and real people of everyone you trust. The first hybrid workforce that
@@ -293,7 +542,7 @@
       <span>Human accountability, not autonomous swarms.</span>
     </div>
 
-    <div class="hero-art">
+    <div class="hero-art reveal delay-1">
       <img src="docs/assets/holon-logo.svg" alt="Holon — fractal team logo" />
     </div>
   </div>
@@ -302,7 +551,7 @@
 <section class="shift" id="shift">
   <div class="wrap">
     <div class="label">Why Holon</div>
-    <h2>Chatbots aren't a workforce.<br/>Agent platforms aren't either.</h2>
+    <h2>Chatbots aren't a workforce. Agent platforms aren't either.</h2>
     <p class="sub">
       Today you get one of two bad deals: a single chat assistant that forgets the rest of
       your team exists, or an "agent platform" that asks you to be a robot manager. Real work
@@ -310,12 +559,12 @@
       people, and the handoffs that connect them.
     </p>
 
-    <div class="quote">
-      The future of work isn't one big agent.<br/>
+    <div class="quote reveal delay-1">
+      The future of work isn't one big agent.
       It's <span class="accent">many small teams, connected.</span>
     </div>
 
-    <div class="row">
+    <div class="row reveal delay-2">
       <div class="panel">
         <h4>Today</h4>
         <p>You manage AI in one tab and humans in another. Work falls between them. Nobody knows where it is.</p>
@@ -328,26 +577,86 @@
   </div>
 </section>
 
+<section class="fractal" id="fractal">
+  <div class="wrap">
+    <figure class="nature-fractal reveal" aria-label="Natural fractal intelligence visualization">
+      <img src="docs/assets/fractal-intelligence-hero.png" alt="A glowing tree, golden-ratio spiral shell, fern fronds, and mycelium root network — fractal patterns recurring at every scale of life." />
+      <figcaption class="fractal-copy">
+        <div class="kicker">Inspired by nature</div>
+        <h3>Intelligence has always been <em>fractal.</em></h3>
+        <p>
+          Forest roots. River deltas. Neural branches. Mycelium. The same pattern,
+          repeated at every scale: small autonomous wholes, connected into something larger.
+        </p>
+      </figcaption>
+    </figure>
+
+    <p class="fractal-lede reveal delay-2">
+      Every durable intelligence in nature is built the same way: a small unit that is also a whole,
+      repeated at every scale. A neuron is a network. A network of neurons is a brain.
+      A brain is a network of brains. <em>No scale is the seat — the intelligence is in the pattern.</em>
+    </p>
+
+    <div class="fractal-grid">
+      <div class="fractal-card reveal delay-1">
+        <div class="ftag">Mycelium</div>
+        <h3>The forest's nervous system.</h3>
+        <p>Beneath every healthy forest, fungal networks connect individual trees into one information system — the "wood wide web" that lets trees share resources and warnings. Each fungus is local. The intelligence is the network.</p>
+      </div>
+      <div class="fractal-card reveal delay-2">
+        <div class="ftag">Neural</div>
+        <h3>Brains made of brains.</h3>
+        <p>A cortical column behaves like a small brain. A region behaves like a small brain. The whole brain behaves like a brain. Same pattern, different scales — there is no central seat of intelligence to find.</p>
+      </div>
+      <div class="fractal-card reveal delay-3">
+        <div class="ftag">Colonies</div>
+        <h3>The simple unit, the wise whole.</h3>
+        <p>One ant is mechanical. A colony is intelligent. A super‑colony spans continents. Local autonomy and clean handoffs all the way up — no manager, no master plan, and yet, coordination at planetary scale.</p>
+      </div>
+    </div>
+
+    <div class="fractal-bridge reveal">
+      <p class="punchline">
+        The strongest intelligence in nature is never centralized.
+        It's <span>a network of small wholes, connected by clean handoffs.</span>
+      </p>
+      <p class="credit">We didn't invent this idea. We named the product after it.</p>
+
+      <div class="etymology">
+        <strong>holon</strong> <em>(n.)</em> — coined by Arthur Koestler, 1967.
+        From Greek <em>hólos</em> "whole" + suffix <em>-on</em> "part."
+        A unit that is simultaneously a complete whole <em>and</em> a node in a larger whole.
+      </div>
+
+      <p class="closer-line">
+        Every Holon desk is a complete team. Every team is a node in a larger network of teams.
+        Same pattern, every scale.
+        <span class="muted">The fractal you saw in our logo above isn't decoration. It's the architecture.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
 <section id="what">
   <div class="wrap">
-    <div class="label">What you get</div>
-    <h2>Three things you can't get anywhere else.</h2>
-    <p class="sub">A real team of your own. A way to plug it into other people's teams. And a guarantee that a human is always in the loop.</p>
+    <div class="label reveal">What you get</div>
+    <h2 class="reveal delay-1">Three things you can't get anywhere else.</h2>
+    <p class="sub reveal delay-2">A real team of your own. A way to plug it into other people's teams. And a guarantee that a human is always in the loop.</p>
 
     <div class="promises">
-      <div class="promise p1">
+      <div class="promise p1 reveal delay-1">
         <div class="num">01</div>
         <div class="glyph"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="11" r="2.2"/><path d="M3 20c.8-3.2 3.2-5 6-5s5.2 1.8 6 5"/><path d="M14 18c.5-1.8 1.8-3 3-3s2.5 1.2 3 3"/></svg></div>
         <h3>A team that's actually yours.</h3>
         <p>Hire a small group of AI workers that live on your machine, know your tools and your style, and report only to you — not buried inside someone else's app.</p>
       </div>
-      <div class="promise p2">
+      <div class="promise p2 reveal delay-2">
         <div class="num">02</div>
         <div class="glyph"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8 6h8M6 8v8M18 8v8M8 18h8"/></svg></div>
         <h3>Plug into everyone else's.</h3>
         <p>Need research, copy, design, code review? Hand the work to a teammate's AI worker — or to the teammate themselves. The result comes back to you, attached to the original task.</p>
       </div>
-      <div class="promise p3">
+      <div class="promise p3 reveal delay-3">
         <div class="num">03</div>
         <div class="glyph"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>A human is always in the loop.</h3>
@@ -359,40 +668,42 @@
 
 <section id="how">
   <div class="wrap">
-    <div class="label">How it works</div>
-    <h2>You manage outcomes.<br/>Holon manages the handoffs.</h2>
-    <p class="sub">No agent graphs. No prompt orchestration. You give work to a member of your team — AI or human — and you see exactly where it is until it comes back done.</p>
+    <div class="label reveal">How it works</div>
+    <h2 class="reveal delay-1">You manage outcomes. Holon manages the handoffs.</h2>
+    <p class="sub reveal delay-2">No agent graphs. No prompt orchestration. You give work to a member of your team — AI or human — and you see exactly where it is until it comes back done.</p>
 
-    <div class="flow">
-      <div class="step"><h4>Open your desk.</h4><p>See what your AI is running, who's waiting on you, and what just came back.</p></div>
-      <div class="step"><h4>Hand off a task.</h4><p>Pick someone on your team. Could be your AI. Could be a teammate represented by a stand‑in.</p></div>
-      <div class="step"><h4>It lands in their world.</h4><p>If it's another person, they get it as a real task in their own Holon — they decide how to do it.</p></div>
-      <div class="step"><h4>Work cascades.</h4><p>They can run it themselves, hand it to their AI, or pass it to someone else. Their choice.</p></div>
-      <div class="step"><h4>Result returns to you.</h4><p>The finished work shows up attached to the task you sent. Audit trail included.</p></div>
+    <div class="flow-container reveal delay-3">
+      <div class="flow">
+        <div class="step"><h4>Open your desk.</h4><p>See what your AI is running, who's waiting on you, and what just came back.</p></div>
+        <div class="step"><h4>Hand off a task.</h4><p>Pick someone on your team. Could be your AI. Could be a teammate represented by a stand‑in.</p></div>
+        <div class="step"><h4>It lands in their world.</h4><p>If it's another person, they get it as a real task in their own Holon — they decide how to do it.</p></div>
+        <div class="step"><h4>Work cascades.</h4><p>They can run it themselves, hand it to their AI, or pass it to someone else.</p></div>
+        <div class="step"><h4>Result returns to you.</h4><p>The finished work shows up attached to the task you sent. Audit trail included.</p></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="stories" style="background: var(--bg-alt);">
   <div class="wrap">
-    <div class="label">Who it's for</div>
-    <h2>Anyone who runs out of themselves.</h2>
-    <p class="sub">Holon is for people who are the bottleneck — and who already have a network of trusted humans they wish they could route work to without losing context or accountability.</p>
+    <div class="label reveal">Who it's for</div>
+    <h2 class="reveal delay-1">Anyone who runs out of themselves.</h2>
+    <p class="sub reveal delay-2">Holon is for people who are the bottleneck — and who already have a network of trusted humans they wish they could route work to without losing context or accountability.</p>
 
     <div class="stories">
-      <div class="story s1">
+      <div class="story s1 reveal delay-1">
         <div class="who"><span class="swatch"></span>The founder</div>
         <h3>"I have three AI hires now. Two of mine, one borrowed from my designer."</h3>
         <p>Her local AI does first‑pass research and drafting. When she needs visual work, she sends it to her designer's stand‑in — the designer decides whether his AI handles it or he does.</p>
         <div class="quote-mini">"It's the first time I felt like I had a team again."</div>
       </div>
-      <div class="story s2">
+      <div class="story s2 reveal delay-2">
         <div class="who"><span class="swatch"></span>The research lead</div>
         <h3>"My team's AI workers handle the tedious half of every project."</h3>
         <p>Six engineers, six Holon desks, six small AI teams. Tasks flow between them with real ownership and returned artifacts — not screenshots in Slack threads.</p>
         <div class="quote-mini">"We stopped losing work between people."</div>
       </div>
-      <div class="story s3">
+      <div class="story s3 reveal delay-3">
         <div class="who"><span class="swatch"></span>The consultancy</div>
         <h3>"Our clients have stand‑ins on our team. Their AI talks to ours."</h3>
         <p>Each client gets a stand‑in inside the consultancy's Holon. Approvals, deliverables, and follow‑ups run through one auditable channel — not a dozen DMs.</p>
@@ -404,12 +715,15 @@
 
 <section id="different">
   <div class="wrap">
-    <div class="label">Why it's different</div>
-    <h2>Built for a network of teams. Not a tower of agents.</h2>
+    <div class="label reveal">Why it's different</div>
+    <h2 class="reveal delay-1">Built for a network of teams. Not a tower of agents.</h2>
 
-    <div class="compare">
+    <div class="compare reveal delay-2">
       <div class="col bad">
-        <h4>Other tools ask you to</h4>
+        <h4>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          Other tools ask you to
+        </h4>
         <ul>
           <li>Build deeper and deeper agent hierarchies inside one workspace</li>
           <li>Manage prompts, graphs, routes, and tools yourself</li>
@@ -419,7 +733,10 @@
         </ul>
       </div>
       <div class="col good">
-        <h4>Holon gives you</h4>
+        <h4>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Holon gives you
+        </h4>
         <ul>
           <li>A small, shallow team that's easy to actually run</li>
           <li>A connection layer for your team and other people's teams</li>
@@ -430,7 +747,7 @@
       </div>
     </div>
 
-    <div class="builder">
+    <div class="builder reveal delay-3">
       <div>
         <h3>And it's a framework, too.</h3>
         <p>Holon ships with a runtime adapter interface. Plug in your favorite agent stack — your team can run anything, and still talk to everyone else's team through the same handoff fabric.</p>
@@ -447,7 +764,7 @@
   </div>
 </section>
 
-<section class="closer" id="cta">
+<section class="closer reveal" id="cta">
   <div class="wrap">
     <h2>Stop being the bottleneck.</h2>
     <p>Holon is being designed in the open right now. Get on the early‑access list — be one of the first people to run a real AI team that connects to everyone else's.</p>
@@ -458,24 +775,8 @@
   </div>
 </section>
 
-<section class="docs-strip">
-  <div class="wrap">
-    <div class="label">For the curious</div>
-    <h2 style="font-size: clamp(24px, 2.6vw, 32px); margin-bottom: 8px;">The full design lives in the repo.</h2>
-    <p class="sub">Holon is a clean commercial restart of an earlier prototype. Every product and architecture decision is written down — read what we're building before it ships.</p>
-    <div class="row">
-      <a href="docs/product/holon-product-definition.md">Product definition →</a>
-      <a href="docs/product/mvp-scope.md">MVP scope →</a>
-      <a href="docs/architecture/functional-architecture.md">Functional architecture →</a>
-      <a href="docs/architecture/implementation-architecture.md">Implementation architecture →</a>
-      <a href="docs/architecture/ui-architecture.md">UI architecture →</a>
-      <a href="docs/architecture/diagrams.html">Diagrams →</a>
-    </div>
-  </div>
-</section>
-
 <footer>
-  <div class="wrap row">
+  <div class="wrap row reveal">
     <div>
       <strong style="color: var(--ink);">Holon</strong> — Local teams. Connected workforce.<br/>
       Designed in the open · 2026
@@ -488,10 +789,41 @@
 </footer>
 
 <script>
+  // Nav scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 8);
   }, { passive: true });
+
+  // Intersection Observer for scroll reveals
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal').forEach((el) => {
+    observer.observe(el);
+  });
+  
+  // Trigger active on elements visible immediately on load
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('active');
+      }
+    });
+  }, 100);
 </script>
 
 </body>

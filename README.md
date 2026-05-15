@@ -4,55 +4,32 @@
 
 # Holon
 
-Local human-AI teams that connect into a larger hybrid workforce network.
+**Your AI team. Connected to everyone else's.**
 
-Holon is a commercial application and framework for hybrid real and virtual workforces. Each local app is a lightweight team desk: a real person can create and manage a small team of local AI agents, proxy people, inbound missions, outbound assignments, and returned deliverables. Complexity grows through connected desks, not through deep local agent hierarchies.
+Holon gives every person a small, private team of AI workers — and lets those teams work with the AI teams and real people of everyone you trust. The first hybrid workforce that actually scales beyond a single chat window.
 
-Holon 的核心不是做一个无限复杂的 AI 员工组织图，而是让每个人都拥有一个轻量的本地团队。这个本地团队可以独立工作，也可以连接到其他真人和他们的本地团队。
+Live site: **https://chenz16.github.io/Holon/**
 
-这个名字来自 **holon** 的系统论概念：一个单元既是完整的整体，也是更大系统的一部分。用在 Holon 里就是：
+## Why Holon
 
-- 每个 local app 都是一个完整的小团队
-- 每个小团队又是更大职场网络里的一个节点
-- 虚拟员工可以连接真人，真人也可以把任务交给自己的虚拟团队
-- 复杂度通过团队之间的连接和级联产生，而不是通过单个 app 内部无限加深 agent 层级
+Today you get one of two bad deals: a single chat assistant that forgets the rest of your team exists, or an "agent platform" that asks you to be a robot manager. Real work doesn't live in either.
 
-Logo 采用分形式结构：中心节点代表一个本地团队，周围的小节点代表本地 AI 员工、proxy 真人和远端团队；每个小节点继续分叉，表示每个团队都可以成为下一级完整团队。它表达的是“局部像整体，整体由局部级联而成”。
+Real work lives between people, the AI workers behind those people, and the handoffs that connect them. Holon is built for that.
 
-## Core Idea
+## Inspired by nature
 
-Every Holon node is both:
+The strongest intelligence in nature is never centralized. It's a network of small wholes, connected by clean handoffs — mycelium under a forest, neurons in a cortex, ants in a colony. Same pattern, every scale.
 
-- a complete local team that can work on its own
-- a node in a larger network of human and AI teams
+We didn't invent this idea. We named the product after it.
 
-This follows the holon principle: each unit is a whole and a part at the same time.
+> **holon** *(n.)* — coined by Arthur Koestler, 1967. From Greek *hólos* "whole" + suffix *-on* "part." A unit that is simultaneously a complete whole *and* a node in a larger whole.
 
-```text
-Person / team owner
-  -> local lightweight agent team
-      -> local AI staff
-      -> proxy staff connected to real people
-      -> inbound missions from other nodes
-      -> outbound assignments to other nodes
-```
+Every Holon desk is a complete team. Every team is a node in a larger network.
 
-## Product Direction
+## Status
 
-Holon is not just an AI employee dashboard. It is a work network where:
+Currently in design phase. This repo holds the public marketing site. The full product and architecture design lives in a separate (private) engineering repo.
 
-- real people can run their own local agent teams
-- virtual staff can act as proxies for real people
-- remote people can accept, reject, execute, or forward missions
-- work can cascade across teams while accountability stays human-owned
-- cloud services provide connection, routing, identity, policy, and reliability
-- local apps preserve each user's own tools, context, and operating style
+## Contact
 
-## Repository Status
-
-This repository is the clean commercial restart of the earlier Mibusy V3 prototype.
-
-The initial design is documented in:
-
-- [`docs/product/holon-product-definition.md`](docs/product/holon-product-definition.md)
-- [`docs/product/mvp-scope.md`](docs/product/mvp-scope.md)
+Early-access requests: chen.zhang6@gmail.com
