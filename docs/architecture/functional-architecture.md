@@ -117,7 +117,121 @@ Minimum properties:
 - last seen
 - revoked state
 
+### Handoff
+
+A handoff is the accountable transfer of work from one owner boundary to another.
+
+It is the core functional primitive behind proxy work. Assignments and missions describe local work objects; handoffs describe the cross-boundary responsibility transfer.
+
+Examples:
+
+```text
+Owner -> local AI staff
+Owner -> proxy staff -> remote human
+Remote human -> their local AI staff
+Remote human -> another proxy staff
+```
+
+A handoff must preserve:
+
+- sender
+- receiver
+- requested outcome
+- context package
+- authority granted
+- budget or limit
+- expected return artifact
+- current state
+- audit trail
+
+See [`handoff-design.md`](handoff-design.md) for the detailed handoff model.
+
 ## Data Flow
+
+### Functional Flow Diagram
+
+GitHub renders this Mermaid diagram directly in Markdown.
+
+```mermaid
+flowchart LR
+  Owner["Owner / Team Lead"]
+  UI["Local Holon App"]
+  Router["Assignment Router"]
+  LocalAI["Local AI Staff"]
+  Hermes["Hermes Runtime Adapter"]
+  Proxy["Proxy Staff"]
+  Protocol["Peer / Cloud Protocol"]
+  Remote["Remote Holon Node"]
+  Inbound["Remote Mission Inbox"]
+  Deliverable["Deliverable Store"]
+  Events["Event Log"]
+
+  Owner -->|"creates assignment"| UI
+  UI -->|"stores assignment"| Router
+  Router -->|"local route"| LocalAI
+  LocalAI -->|"bounded job"| Hermes
+  Hermes -->|"runtime events"| Events
+  Hermes -->|"deliverable draft"| Deliverable
+  Router -->|"proxy route"| Proxy
+  Proxy -->|"dispatch mission"| Protocol
+  Protocol -->|"send mission"| Remote
+  Remote --> Inbound
+  Inbound -->|"accept / reject / execute"| Remote
+  Remote -->|"completion callback"| Protocol
+  Protocol -->|"validated return"| Deliverable
+  Protocol -->|"status events"| Events
+  Deliverable -->|"shown on assignment"| UI
+```
+
+### Proxy Assignment Sequence
+
+```mermaid
+sequenceDiagram
+  participant O as Owner
+  participant A as Local Holon Node A
+  participant R as Assignment Router
+  participant P as Proxy Staff
+  participant C as Peer/Cloud Protocol
+  participant B as Remote Holon Node B
+  participant H as Remote Human
+
+  O->>A: Create assignment for proxy staff
+  A->>R: Store assignment and route target
+  R->>P: Resolve proxy connection
+  P->>C: Dispatch mission with origin assignment id
+  C->>B: POST mission
+  B->>B: Validate inbound token
+  B->>H: Show mission in Inbound
+  H->>B: Accept and complete work
+  B->>C: POST completion callback
+  C->>A: Return deliverable
+  A->>A: Validate callback token
+  A->>A: Attach deliverable to assignment
+  A-->>O: Show completed proxy assignment
+```
+
+### Local AI Assignment Sequence
+
+```mermaid
+sequenceDiagram
+  participant O as Owner
+  participant A as Local Holon Node
+  participant R as Assignment Router
+  participant S as Local AI Staff
+  participant H as Hermes Adapter
+  participant D as Deliverable Store
+
+  O->>A: Create assignment for local AI staff
+  A->>R: Store assignment and route target
+  R->>S: Start local AI assignment
+  S->>H: Run bounded task with scoped context
+  H-->>A: Emit normalized runtime events
+  H->>D: Return deliverable draft
+  D-->>A: Persist deliverable
+  A-->>O: Show completed local assignment
+```
+
+For a standalone rendered version, open [`diagrams.html`](diagrams.html).
 
 ### Local AI Assignment
 
@@ -141,6 +255,7 @@ Key rule: runtime output is normalized before it reaches the product UI.
 Owner creates assignment
   -> node stores assignment
   -> router sees target = proxy staff
+  -> node creates handoff record
   -> connection layer validates target
   -> mission is sent to remote node
   -> local assignment becomes waiting_remote
@@ -340,4 +455,3 @@ The runtime is not the product authority.
 5. Every returned work item becomes a deliverable.
 6. Silent network failure is not acceptable.
 7. Proxy staff must be visibly different from local AI staff.
-

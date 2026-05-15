@@ -14,10 +14,15 @@ Holon architecture is documented from three angles:
 3. [`ui-architecture.md`](ui-architecture.md)
    Product UI architecture: navigation, screen responsibilities, component model, visual system, and interaction rules for hybrid human-AI work.
 
+4. [`handoff-design.md`](handoff-design.md)
+   Handoff design: the core accountability transfer primitive between owners, local AI staff, proxy staff, missions, assignments, and deliverables.
+
+5. [`diagrams.html`](diagrams.html)
+   Standalone HTML/SVG diagrams for the functional architecture. Open it directly in a browser to view flow and sequence diagrams without a docs build step.
+
 The product principle is:
 
 ```text
 Each local app can build a lightweight team.
 Larger organization complexity comes from connected teams, not deep local agent hierarchy.
 ```
-
