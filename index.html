@@ -136,11 +136,25 @@
   .meta-row .dot { width: 4px; height: 4px; background: var(--ink-mute); border-radius: 50%; }
 
   .hero-art {
-    margin-top: 64px;
-    border: 1px solid var(--line); border-radius: var(--radius);
-    background: #fff; padding: 32px; text-align: center;
+    margin-top: 56px;
+    text-align: center;
+    background: transparent;
   }
-  .hero-art img { width: 100%; max-width: 760px; display: block; margin: 0 auto; }
+  .hero-art svg.network-animation {
+    width: 100%; max-width: 880px; height: auto;
+    display: block; margin: 0 auto;
+  }
+  .hero-caption {
+    margin: 18px auto 0; max-width: 560px;
+    font-size: 14px; color: var(--ink-mute); letter-spacing: .01em;
+    font-style: italic;
+    font-family: 'Charter', 'Iowan Old Style', Georgia, serif;
+  }
+  .hero-caption strong { color: var(--ink-soft); font-style: normal; font-weight: 600; }
+  @media (prefers-reduced-motion: reduce) {
+    .network-animation * { animation: none !important; }
+    .network-animation animate, .network-animation animateMotion { display: none; }
+  }
 
   /* Section base */
   section { padding: 96px 0; }
@@ -543,7 +557,145 @@
     </div>
 
     <div class="hero-art reveal delay-1">
-      <img src="docs/assets/holon-logo.svg" alt="Holon — fractal team logo" />
+      <svg class="network-animation" viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated fractal network: each node has its own intelligence; connections carry signals between them; the whole network coordinates as one. The evolution of intelligence — individual to collective.">
+        <defs>
+          <filter id="signalGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="1.8" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- collective intelligence: expanding halos from center -->
+        <circle cx="300" cy="190" r="50" fill="none" stroke="#2E7D52" stroke-width="1.5" opacity="0">
+          <animate attributeName="r" values="50;180" dur="8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;0" dur="8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="300" cy="190" r="50" fill="none" stroke="#1F6F9E" stroke-width="1.5" opacity="0">
+          <animate attributeName="r" values="50;180" dur="8s" begin="-4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;0" dur="8s" begin="-4s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- subtle connection edges -->
+        <g stroke="#1A1A18" stroke-width="1.6" stroke-linecap="round" opacity="0.18">
+          <line x1="300" y1="190" x2="210" y2="120"/>
+          <line x1="300" y1="190" x2="390" y2="120"/>
+          <line x1="300" y1="190" x2="210" y2="260"/>
+          <line x1="300" y1="190" x2="390" y2="260"/>
+          <line x1="210" y1="120" x2="140" y2="80"/>
+          <line x1="210" y1="120" x2="140" y2="130"/>
+          <line x1="390" y1="120" x2="460" y2="80"/>
+          <line x1="390" y1="120" x2="460" y2="130"/>
+          <line x1="210" y1="260" x2="140" y2="250"/>
+          <line x1="210" y1="260" x2="140" y2="300"/>
+          <line x1="390" y1="260" x2="460" y2="250"/>
+          <line x1="390" y1="260" x2="460" y2="300"/>
+        </g>
+
+        <!-- node breathing: each is independently intelligent -->
+        <!-- Center hub -->
+        <circle cx="300" cy="190" r="32" fill="#111111">
+          <animate attributeName="r" values="32;34;32" dur="4.2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="300" cy="190" r="14" fill="#F8F6EF">
+          <animate attributeName="opacity" values="0.85;1;0.85" dur="2.8s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- 4 mid-tier nodes (brand colors) -->
+        <circle cx="210" cy="120" r="16" fill="#C69A35">
+          <animate attributeName="r" values="16;17.5;16" dur="3.7s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.85;1;0.85" dur="3.7s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="390" cy="120" r="16" fill="#1F6F9E">
+          <animate attributeName="r" values="16;17.5;16" dur="4.1s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.85;1;0.85" dur="4.1s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="210" cy="260" r="16" fill="#2E7D52">
+          <animate attributeName="r" values="16;17.5;16" dur="4.6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.85;1;0.85" dur="4.6s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="390" cy="260" r="16" fill="#7B4FAB">
+          <animate attributeName="r" values="16;17.5;16" dur="5.1s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.85;1;0.85" dur="5.1s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- 8 outer leaf nodes -->
+        <circle cx="140" cy="80" r="8" fill="#C69A35">
+          <animate attributeName="r" values="8;9.2;8" dur="3.3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="140" cy="130" r="8" fill="#C69A35">
+          <animate attributeName="r" values="8;9.2;8" dur="2.7s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="460" cy="80" r="8" fill="#1F6F9E">
+          <animate attributeName="r" values="8;9.2;8" dur="3.9s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="460" cy="130" r="8" fill="#1F6F9E">
+          <animate attributeName="r" values="8;9.2;8" dur="3.1s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="140" cy="250" r="8" fill="#2E7D52">
+          <animate attributeName="r" values="8;9.2;8" dur="4.2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="140" cy="300" r="8" fill="#2E7D52">
+          <animate attributeName="r" values="8;9.2;8" dur="3.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="460" cy="250" r="8" fill="#7B4FAB">
+          <animate attributeName="r" values="8;9.2;8" dur="4.4s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="460" cy="300" r="8" fill="#7B4FAB">
+          <animate attributeName="r" values="8;9.2;8" dur="2.9s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- traveling signal pulses: handoffs between nodes -->
+        <g filter="url(#signalGlow)">
+          <!-- center <-> mid (escalation + broadcast) -->
+          <circle r="3.8" fill="#2E7D52" opacity="0.95">
+            <animateMotion dur="3.5s" repeatCount="indefinite" path="M300 190 L210 120"/>
+          </circle>
+          <circle r="3.8" fill="#2E7D52" opacity="0.95">
+            <animateMotion dur="4.2s" begin="-1s" repeatCount="indefinite" path="M210 120 L300 190"/>
+          </circle>
+          <circle r="3.8" fill="#2E7D52" opacity="0.95">
+            <animateMotion dur="3.8s" begin="-2s" repeatCount="indefinite" path="M300 190 L390 120"/>
+          </circle>
+          <circle r="3.8" fill="#2E7D52" opacity="0.95">
+            <animateMotion dur="4.5s" begin="-0.5s" repeatCount="indefinite" path="M390 260 L300 190"/>
+          </circle>
+          <circle r="3.8" fill="#2E7D52" opacity="0.95">
+            <animateMotion dur="3.3s" begin="-1.5s" repeatCount="indefinite" path="M210 260 L300 190"/>
+          </circle>
+          <circle r="3.8" fill="#2E7D52" opacity="0.95">
+            <animateMotion dur="4.7s" begin="-2.5s" repeatCount="indefinite" path="M300 190 L390 260"/>
+          </circle>
+          <!-- mid <-> outer (local team activity) -->
+          <circle r="2.8" fill="#C69A35" opacity="0.95">
+            <animateMotion dur="2.8s" begin="-0.5s" repeatCount="indefinite" path="M210 120 L140 80"/>
+          </circle>
+          <circle r="2.8" fill="#C69A35" opacity="0.95">
+            <animateMotion dur="3.1s" begin="-1.5s" repeatCount="indefinite" path="M140 130 L210 120"/>
+          </circle>
+          <circle r="2.8" fill="#C69A35" opacity="0.95">
+            <animateMotion dur="2.6s" begin="-1.2s" repeatCount="indefinite" path="M390 120 L460 80"/>
+          </circle>
+          <circle r="2.8" fill="#C69A35" opacity="0.95">
+            <animateMotion dur="3.4s" begin="-2.1s" repeatCount="indefinite" path="M460 130 L390 120"/>
+          </circle>
+          <circle r="2.8" fill="#C69A35" opacity="0.95">
+            <animateMotion dur="2.9s" begin="-1.8s" repeatCount="indefinite" path="M210 260 L140 300"/>
+          </circle>
+          <circle r="2.8" fill="#C69A35" opacity="0.95">
+            <animateMotion dur="3.2s" begin="-2.4s" repeatCount="indefinite" path="M140 250 L210 260"/>
+          </circle>
+          <circle r="2.8" fill="#C69A35" opacity="0.95">
+            <animateMotion dur="3.6s" begin="-0.8s" repeatCount="indefinite" path="M390 260 L460 250"/>
+          </circle>
+          <circle r="2.8" fill="#C69A35" opacity="0.95">
+            <animateMotion dur="2.7s" begin="-2.7s" repeatCount="indefinite" path="M460 300 L390 260"/>
+          </circle>
+        </g>
+      </svg>
+      <p class="hero-caption">
+        <strong>Each node is intelligent. The network is more so.</strong>
+        &nbsp;The evolution of intelligence — individual to collective.
+      </p>
     </div>
   </div>
 </header>
