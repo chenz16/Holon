@@ -500,6 +500,32 @@
   .closer .btn.ghost { color: #fff; border-color: #444; }
   .closer .btn.ghost:hover { background: #1A1A18; }
 
+  /* Download section */
+  .download { padding: 120px 0; background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .download h2 { font-size: clamp(32px, 4.5vw, 52px); margin: 0 0 16px; }
+  .download .lede { color: var(--ink-soft); font-size: 18px; max-width: 620px; margin: 0 0 40px; }
+  .dl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 32px; }
+  @media (max-width: 760px) { .dl-grid { grid-template-columns: 1fr; } }
+  .dl-card {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 28px; display: flex; flex-direction: column; gap: 12px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .dl-card:hover { transform: translateY(-2px); border-color: var(--ink); }
+  .dl-card .platform { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+  .dl-card h3 { margin: 0; font-size: 22px; }
+  .dl-card p { margin: 0; color: var(--ink-soft); font-size: 14.5px; flex-grow: 1; }
+  .dl-card .btn { align-self: flex-start; margin-top: 8px; }
+  .dl-card.win .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .dl-card.win .btn.primary:hover { background: #18567A; border-color: #18567A; }
+  .dl-card.and .btn.primary { background: var(--green); border-color: var(--green); color: #fff; }
+  .dl-card.and .btn.primary:hover { background: #246A45; border-color: #246A45; }
+  .dl-card.ios .btn.primary { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .dl-notes { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 26px; color: var(--ink-soft); font-size: 14.5px; }
+  .dl-notes strong { color: var(--ink); }
+  .dl-notes ul { margin: 10px 0 0; padding-left: 20px; }
+  .dl-notes li { margin: 6px 0; }
+
   /* Docs strip (small, end) */
   .docs-strip { padding: 64px 0; background: var(--bg); }
   .docs-strip .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
@@ -530,6 +556,7 @@
       <li><a href="#what">What you get</a></li>
       <li><a href="#how">How it works</a></li>
       <li><a href="#stories">Who it's for</a></li>
+      <li><a href="#download">Download</a></li>
       <li><a class="btn primary sm" href="#cta">Get early access</a></li>
     </ul>
   </div>
@@ -545,9 +572,9 @@
       actually scales beyond a single chat window.
     </p>
     <div class="btn-row">
-      <a class="btn primary" href="https://github.com/chenz16/holon-release/releases" target="_blank" rel="noopener">Download Personal — free →</a>
+      <a class="btn primary" href="#download">Download Personal — free →</a>
       <a class="btn ghost" href="#cta">Get early access</a>
-      <a class="btn ghost" href="https://github.com/chenz16/holon-release" target="_blank" rel="noopener">Releases on GitHub</a>
+      <a class="btn ghost" href="https://github.com/chenz16/Holon" target="_blank" rel="noopener">Source on GitHub</a>
     </div>
     <div class="meta-row">
       <span>Personal edition — free, designing in the open.</span>
@@ -917,14 +944,49 @@
   </div>
 </section>
 
+<section class="download reveal" id="download">
+  <div class="wrap">
+    <h2>Download Holon Personal</h2>
+    <p class="lede">Free for individuals. Builds refresh automatically every day — the links below always point at the latest nightly.</p>
+    <div class="dl-grid">
+      <div class="dl-card win">
+        <span class="platform">Windows</span>
+        <h3>Holon for Windows</h3>
+        <p>Desktop installer. Runs locally on your machine; your data and AI workers stay on your hardware.</p>
+        <a class="btn primary" href="https://github.com/chenz16/manage-your-cli/releases/download/nightly/Holon-Setup.exe">Download .exe →</a>
+      </div>
+      <div class="dl-card and">
+        <span class="platform">Android</span>
+        <h3>Holon for Android</h3>
+        <p>Mobile companion. Connects to your desk over your LAN — your phone stays in sync with your AI team.</p>
+        <a class="btn primary" href="https://github.com/chenz16/manage-your-cli/releases/download/nightly/Holon-Android.apk">Download .apk →</a>
+      </div>
+      <div class="dl-card ios">
+        <span class="platform">iOS</span>
+        <h3>Holon for iOS</h3>
+        <p>TestFlight beta. Same companion app; email for an invite while public release is being arranged.</p>
+        <a class="btn primary" href="mailto:chen.zhang6@gmail.com?subject=Holon%20iOS%20TestFlight">Request TestFlight invite</a>
+      </div>
+    </div>
+    <div class="dl-notes">
+      <strong>Install notes</strong>
+      <ul>
+        <li><strong>Windows</strong>: double-click <code>Holon-Setup.exe</code>. On first install you may see a SmartScreen warning — click "More info" → "Run anyway". Code-signing is being arranged.</li>
+        <li><strong>Android</strong>: enable "Install unknown apps" for your browser, open the <code>.apk</code>, install. On first launch, enter your desk URL when prompted.</li>
+        <li><strong>iOS</strong>: send <a href="mailto:chen.zhang6@gmail.com?subject=Holon%20iOS%20TestFlight">chen.zhang6@gmail.com</a> a note and you'll get a TestFlight invite.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="closer reveal" id="cta">
   <div class="wrap">
     <h2>Stop being the bottleneck.</h2>
     <p>Holon is being designed in the open right now. Get on the early‑access list — be one of the first people to run a real AI team that connects to everyone else's.</p>
     <div class="btn-row">
-      <a class="btn primary" href="https://github.com/chenz16/holon-release/releases" target="_blank" rel="noopener">Download Personal — free →</a>
+      <a class="btn primary" href="#download">Download Personal — free →</a>
       <a class="btn ghost" href="mailto:chen.zhang6@gmail.com?subject=Holon%20early%20access">Request early access</a>
-      <a class="btn ghost" href="https://github.com/chenz16/holon-release" target="_blank" rel="noopener">Releases on GitHub</a>
+      <a class="btn ghost" href="https://github.com/chenz16/Holon" target="_blank" rel="noopener">Source on GitHub</a>
     </div>
   </div>
 </section>

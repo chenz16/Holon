@@ -26,9 +26,21 @@ We didn't invent this idea. We named the product after it.
 
 Every Holon desk is a complete team. Every team is a node in a larger network.
 
+## Download
+
+Holon Personal is free. Pick your platform — builds refresh automatically every day, so the link below always points at the latest nightly.
+
+[![Windows](https://img.shields.io/badge/Windows-Download-1F6F9E?logo=windows&style=for-the-badge)](https://github.com/chenz16/manage-your-cli/releases/download/nightly/Holon-Setup.exe)
+[![Android](https://img.shields.io/badge/Android-Download-2E7D52?logo=android&style=for-the-badge)](https://github.com/chenz16/manage-your-cli/releases/download/nightly/Holon-Android.apk)
+[![iOS](https://img.shields.io/badge/iOS-TestFlight-555?logo=apple&style=for-the-badge)](mailto:chen.zhang6@gmail.com?subject=Holon%20iOS%20TestFlight)
+
+- **Windows**: double-click `Holon-Setup.exe`. On first install you may see a SmartScreen warning — click "More info" → "Run anyway". Code-signing is being arranged.
+- **Android**: enable "Install unknown apps" for your browser, open the `.apk`, install. On first launch, enter your desk URL when prompted.
+- **iOS**: currently requires being on the TestFlight tester list. Email <chen.zhang6@gmail.com> for an invite.
+
 ## Status
 
-Currently in design phase. This repo holds the public marketing site. The full product and architecture design lives in a separate (private) engineering repo.
+This repo holds the public marketing site. The full product and architecture design lives in a separate (private) engineering repo.
 
 ## Contact
 
