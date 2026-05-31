@@ -507,7 +507,8 @@
   .dl-group { margin-bottom: 40px; }
   .dl-group-title { font-size: 18px; margin: 0 0 16px 0; color: var(--ink); display: flex; align-items: baseline; gap: 8px; }
   .dl-group-sub { font-size: 14px; color: var(--ink-soft); font-weight: 400; }
-  .dl-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .dl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .dl-group.mobile .dl-grid { grid-template-columns: repeat(2, 1fr); }
   @media (max-width: 760px) { .dl-grid { grid-template-columns: 1fr; } }
   .dl-card {
     background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
@@ -524,6 +525,7 @@
   .dl-card.and .btn.primary { background: var(--green); border-color: var(--green); color: #fff; }
   .dl-card.and .btn.primary:hover { background: #246A45; border-color: #246A45; }
   .dl-card.ios .btn.primary { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .dl-card.mac .btn.primary { background: var(--ink); border-color: var(--ink); color: #fff; }
   .dl-card.lin .btn { background: transparent; border-color: var(--ink-mute); color: var(--ink-mute); }
   .dl-notes { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 26px; color: var(--ink-soft); font-size: 14.5px; }
   .dl-notes strong { color: var(--ink); }
@@ -961,15 +963,21 @@
           <p>Desktop installer. Runs locally on your machine; your data and AI workers stay on your hardware.</p>
           <a class="btn primary" href="https://github.com/chenz16/manage-your-cli/releases/download/nightly/Holon-Setup.exe">Download .exe →</a>
         </div>
+        <div class="dl-card mac">
+          <span class="platform">macOS</span>
+          <h3>Holon Desk for macOS</h3>
+          <p>Universal .dmg for Apple Silicon (M1/M2/M3) and Intel Macs.</p>
+          <a class="btn" href="#download" aria-disabled="true" style="opacity:0.55;cursor:not-allowed;">Coming soon</a>
+        </div>
         <div class="dl-card lin">
-          <span class="platform">Mac / Linux</span>
-          <h3>Holon Desk for Mac &amp; Linux</h3>
-          <p>Native .dmg for macOS and .AppImage / .deb for Linux.</p>
+          <span class="platform">Linux</span>
+          <h3>Holon Desk for Linux</h3>
+          <p>Native .AppImage and .deb for Ubuntu, Debian, Fedora, Arch and others.</p>
           <a class="btn" href="#download" aria-disabled="true" style="opacity:0.55;cursor:not-allowed;">Coming soon</a>
         </div>
       </div>
     </div>
-    <div class="dl-group">
+    <div class="dl-group mobile">
       <h3 class="dl-group-title">📱 Mobile (client) <span class="dl-group-sub">— companion that connects to your desk</span></h3>
       <div class="dl-grid">
         <div class="dl-card and">
